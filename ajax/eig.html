@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title>
+            JSON SANDBIX
+        </title>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <ul id="people"></ul>
+        <script type="text/javascript">
+            var person={
+                name: "ashish",
+                age: 34,
+                company: "Capgemini",
+                address: {
+                    street:"5maninstreet",
+                    city:"jamshedpur"
+                },
+                chidren: ['asd','asd']
+            }
+            
+            console.log(person.address.street);
+            console.log(person.chidren);
+            
+
+            var people=[
+                {
+                    name:"brad",
+                    age:56
+                },
+                {
+                    name:"ashish",
+                    age:90
+                },
+
+                {
+                    name:"nora",
+                    age:45
+                }
+            ];
+
+            //AJAX-------------------------------------------------------
+
+            var xhttp= new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
+            {
+                if(this.readyState == 4 && this.status==200)
+                {
+                    //var response = xhttp.responseText;
+                    //it will not reflect because it is actually in json string we have to convert in object to get the object specifig value
+                    var response = JSON.parse(xhttp.responseText);
+                    var people= response.people;
+
+
+                    var output='';
+                    for(var i=0;i<people.length;i++)
+                    {
+                        //console.log(people[i]);
+                        //console.log(people[i].name+" "+people[i].age);
+                         output += '<li>'+people[i].name+'</li>';
+                        
+                    }
+                    $('document').ready(function()
+                    {
+                        $('#people').append(output);
+                    })
+                }
+                       
+            };
+            xhttp.open("GET","people.json",true);
+            xhttp.send();
+
+
+
+            //---------------------------------------------------------
+            //console.log(people[1].age);
+            //console.log(people[0]);
+            
+            /*var output='';
+            for(var i=0;i<people.length;i++)
+            {
+                //console.log(people[i]);
+                //console.log(people[i].name+" "+people[i].age);
+            output += '<li>'+people[i].name+'</li>';
+                
+            }
+            $('#people').append(output);*/
+
+
+        
+            // object to json-----------------------------------------
+          /*  person = JSON.stringify(person);
+            // json to object
+            person = JSON.parse(person);
+            document.write(person.age+" "+person.name);
+
+
+            console.log(person);
+            document.write(person);
+           // console.log(person.age+" "+person.name);
+            //document.write(person.age+" "+person.name);*/
+        </script>
+    </body>
+</html>

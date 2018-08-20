@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+		//window.onload in JS
+		$('document').ready(function () {
+
+            // $('.small,span.big').css('border','10px solid red');
+            //$('div[title!="dfraf"]').css('border','10px solid red');
+           // $('[title*="Title"]').css('border','10px solid red');
+           // $('[title~="mySpan"]').css('border','10px solid red');
+           // $('div[title][style]').css('border','10px solid red');
+           // $('ul li:first-child').css('border','10px solid red');
+           // $('clickme').hide();
+            //$('*').css('background-color','blue');
+
+           //casesensitive attribute selector
+           $('div[title]').filter(function()
+           {
+               return $(this).attr('title').toLowerCase == "divtitle";
+
+           }).css('border','10px solid red');
+           
+           //caseinsensitive
+           $('div[title]').filter(function()
+           {
+               return (/Div/i).test($(this).attr('title'));
+
+           }).css('border','10px solid red');
+
+		});
+	</script>
+ 
+</head>
+<body>
+
+	
+    <div title="DIVTITLE">
+           Hi welcome to jquerry   
+    </div>
+    <div title="DIVTITLE">
+        div2
+    </div>
+    <div title="DIVTITLE">
+            Hi welcome to jquerry   
+     </div>
+     <div title="divtitle">
+         div2
+     </div>
+     <div title="DiVTitlE">
+            Hi welcome to jquerry   
+     </div>
+     <div title="divtitle">
+         div2
+     </div>
+    <span title="DiVTitlE mySpan">
+        Hi welcome to jquerry 
+    </span>
+    
+    <p title="DiVTitlE"> List 1:</p>
+
+   
+</body>
+</html>

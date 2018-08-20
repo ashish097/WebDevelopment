@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>
+            JSON SANDBIX
+        </title>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    </head>
+    <script type="text/javascript">
+        //AJAX-----------------------------------------------------
+       
+
+
+    $('document').ready(function()
+    {
+        $('#add-order').click(function()
+        {
+            var $name= $('#name').val();
+            var $Bevrages= $('#Bevrages').val();
+
+            var xhttp= new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
+            {
+                if(this.readyState == 4 && this.status==200)
+                {
+                    //var response = xhttp.responseText;
+                    //it will not reflect because it is actually in json string we have to convert in object to get the object specifig value
+                    var response = JSON.parse(xhttp.responseText);
+                    var people= response.people;
+
+
+                    var output='';
+                    var takenorder='<li>'+$name+'</li>'+" "+'<li>'+$Bevrages+'</li>';
+                    for(var i=0;i<people.length;i++)
+                    {
+                        //console.log(people[i]);
+                        //console.log(people[i].name+" "+people[i].age);
+                         output += '<li>'+people[i].name+'</li>';
+                         output += '<li>'+people[i].age+'</li>';
+                        
+                    }
+                    $('document').ready(function()
+                    {
+                        $('#orders').append(output);
+                        $('#orders').append(takenorder);
+                    })
+                }
+                       
+            };
+            xhttp.open("POST","people.json",true);
+            xhttp.send();
+
+            });
+            
+        });
+    </script>
+    <body>
+        <h2>Bevrages</h2>
+        <ul id="orders">
+        </ul>
+        <h1>
+            ADD A COFFEE ORDER
+        </h1>
+        <p>Name:     <input type="text" id="name"></p>
+        <p>Bevrages: <input type="text" id="Bevrages"></p>
+        <button id="add-order">ADD</button>
+    </body>
+</html>
